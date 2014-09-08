@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>GitHub API JS Practice</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <script>
+      $(function(){
+        var apiURLBase = "https://api.github.com/";
+        var message = $("#message");
+
+
+
+        // getUserData("matthewmccullough");
+        getIssueMetrics();
+
+
+        function getIssueMetrics(username){
+          var jqxhr = $.ajax( apiURLBase + "" )
+          .done(function(data) {
+            console.log(data);
+
+          });
+        }
+
+
+
+        function getUserData(username){
+          message.html("Using the GitHub API with JavaScript!");
+
+          var jqxhr = $.ajax( apiURLBase + "users/" + username )
+          .done(function(data) {
+            var name = $("<h1>").html(data.name);
+            var gravatar = $("<img>").attr("src", "http://www.gravatar.com/avatar/"+data.gravatar_id);
+            message.append(name);
+            message.append(gravatar);
+          });
+        }
+
+      });
+    </script>
+  </head>
+  <body>
+    <div id="message"></div>
+  </body>
+</html>
